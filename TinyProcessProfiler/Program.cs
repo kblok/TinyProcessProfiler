@@ -14,9 +14,8 @@ namespace TinyProcessProfiler
             if (!string.IsNullOrEmpty(processPath))
             {
                 var iterationData = new List<TimeSpan>();
-                var currentIteration = 1;
-
-                while (currentIteration <= iterations)
+                
+                for (int currentIteration = 1; currentIteration <= iterations; currentIteration++)
                 {
                     Console.WriteLine($"Running iteration: {currentIteration}");
 
@@ -38,8 +37,8 @@ namespace TinyProcessProfiler
         private static void PrintReport(List<TimeSpan> iterationData)
         {
             Console.WriteLine("FINISHED");
-            Console.WriteLine($"Fastest run:\t\t {iterationData.Min().Seconds} seconds");
-            Console.WriteLine($"Slowest run:\t\t {iterationData.Max().Seconds} seconds");
+            Console.WriteLine($"Fastest run:\t\t {iterationData.Select(t => t.Seconds).Min()} seconds");
+            Console.WriteLine($"Slowest run:\t\t {iterationData.Select(t => t.Seconds).Max()} seconds");
             Console.WriteLine($"Avg run:\t\t {iterationData.Select(t => t.Seconds).Average()} seconds");
             Console.WriteLine($"Std deviation:\t\t {StandardDeviation(iterationData.Select(t => t.Seconds))}");
         }
