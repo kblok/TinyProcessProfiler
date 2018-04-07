@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
+using Humanizer;
 
 namespace TinyProcessProfiler
 {
@@ -37,9 +38,10 @@ namespace TinyProcessProfiler
         private static void PrintReport(List<TimeSpan> iterationData)
         {
             Console.WriteLine("FINISHED");
-            Console.WriteLine($"Fastest run:\t\t {iterationData.Select(t => t.Seconds).Min()} seconds");
-            Console.WriteLine($"Slowest run:\t\t {iterationData.Select(t => t.Seconds).Max()} seconds");
-            Console.WriteLine($"Avg run:\t\t {iterationData.Select(t => t.Seconds).Average()} seconds");
+            Console.WriteLine($"Fastest run:\t\t {iterationData.Min().Humanize(5)}");
+            Console.WriteLine($"Slowest run:\t\t {iterationData.Max().Humanize(5)}");
+            
+            Console.WriteLine($"Avg run:\t\t {new TimeSpan(0, 0, 0, 0, Convert.ToInt32(iterationData.Select(t => t.TotalMilliseconds).Average())).Humanize(5)}");
             Console.WriteLine($"Std deviation:\t\t {StandardDeviation(iterationData.Select(t => t.Seconds))}");
         }
 

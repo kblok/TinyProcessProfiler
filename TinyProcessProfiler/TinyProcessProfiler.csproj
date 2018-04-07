@@ -6,4 +6,8 @@
 	<RuntimeIdentifier>win7-x64</RuntimeIdentifier>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.2.0" />
+  </ItemGroup>
+
 </Project>
