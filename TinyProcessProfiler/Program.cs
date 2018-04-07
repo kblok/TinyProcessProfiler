@@ -63,7 +63,8 @@ namespace TinyProcessProfiler
         private static Process BuildProcess(string processPath)
         {
             var process = new Process();
-            process.StartInfo.FileName = processPath;
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = $"/c \"{processPath}\"";
 
             return process;
         }
